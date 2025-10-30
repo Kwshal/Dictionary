@@ -1,18 +1,40 @@
 const textarea = document.getElementById('inputArea');
-const names = document.getElementById('names');
-const places = document.getElementById('places');
-const sentences = document.getElementById('sentences');
 const namesList = document.getElementById('names-list');
+const thingsList = document.getElementById('things-list');
 const placesList = document.getElementById('places-list');
+const verbsList = document.getElementById('verbs-list');
 const sentencesList = document.getElementById('sentences-list');
-const listItems = document.querySelectorAll('#names-list li, #places-list li, #sentences-list li');
 
+const listItems = document.querySelectorAll('li');
+const namesBtn = document.getElementById('add-name');
+const thingsBtn = document.getElementById('add-thing');
+const placesBtn = document.getElementById('add-place');
+const verbsBtn = document.getElementById('add-verb');
+const sentencesBtn = document.getElementById('add-sentence');    
+
+
+let localData = localStorage.getItem('dictionaryData');
+if (localData) {
+     const data = JSON.parse(localData);
+     data.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          listItems.push(li);
+     });
+}
 listItems.forEach(item => {
+     item.addEventListener('dblclick', e => {
      item.contentEditable = true;
-     item.addEventListener('click', e => {
           e.target.focus();
      });
-     console.log("clicked");
+     item.onblur = () => {
+          item.contentEditable = false;
+          if (item.textContent.trim() === '') {
+               item.remove();
+          } else {
+               item.textContent = item.textContent.trim();
+          }
+     };
 });
 
 textarea.addEventListener('input', () => {
@@ -20,27 +42,34 @@ textarea.addEventListener('input', () => {
      if (text.includes('@@@')) {
           textarea.style.display = 'none';
           const main = document.querySelector('main');
-          main.style.display = 'block';
+          main.style.display = 'flex';
      }
 });
+function addListItem(list, btn) {
+     btn.addEventListener('click', () => {
 
-names.addEventListener('dblclick', () => {
-     let li = document.createElement('li');
-     li.contentEditable = true;
-     namesList.appendChild(li);
-     li.focus();
-});
+          let li = document.createElement('li');
+          list.appendChild(li);
+          li.contentEditable = true;
+          li.focus();
 
-places.addEventListener('dblclick', () => {
-     let li = document.createElement('li');
-     li.contentEditable = true;
-     placesList.appendChild(li);
-     li.focus();
-});
+          li.addEventListener('dblclick', e => {
+               li.contentEditable = true;
+               li.focus();
+          });
+          li.onblur = () => {
+               li.contentEditable = false;
+               if (li.textContent.trim() === '') {
+                    li.remove();
+               } else {
+                    li.textContent = li.textContent.trim();
+               }
+          };
+     });
+}
 
-sentences.addEventListener('dblclick', () => {
-     let li = document.createElement('li');
-     li.contentEditable = true;
-     sentencesList.appendChild(li);
-     li.focus();
-});
+addListItem(namesList, namesBtn);
+addListItem(placesList, placesBtn);
+addListItem(sentencesList, sentencesBtn);
+addListItem(verbsList, verbsBtn);
+addListItem(thingsList, thingsBtn);
