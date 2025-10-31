@@ -1,40 +1,23 @@
-const textarea = document.getElementById('inputArea');
+import { db, ref, set, get, onValue, push, update, remove } from "./db.js";
+
+const textarea = document.getElementById('input-area');
+
+// all lists
 const namesList = document.getElementById('names-list');
 const thingsList = document.getElementById('things-list');
 const placesList = document.getElementById('places-list');
 const verbsList = document.getElementById('verbs-list');
 const sentencesList = document.getElementById('sentences-list');
 
-const listItems = document.querySelectorAll('li');
+// add buttons
 const namesBtn = document.getElementById('add-name');
 const thingsBtn = document.getElementById('add-thing');
 const placesBtn = document.getElementById('add-place');
 const verbsBtn = document.getElementById('add-verb');
-const sentencesBtn = document.getElementById('add-sentence');    
+const sentencesBtn = document.getElementById('add-sentence');
 
-
-let localData = localStorage.getItem('dictionaryData');
-if (localData) {
-     const data = JSON.parse(localData);
-     data.forEach(item => {
-          const li = document.createElement('li');
-          li.textContent = item;
-          listItems.push(li);
-     });
-}
-listItems.forEach(item => {
-     item.addEventListener('dblclick', e => {
-     item.contentEditable = true;
-          e.target.focus();
-     });
-     item.onblur = () => {
-          item.contentEditable = false;
-          if (item.textContent.trim() === '') {
-               item.remove();
-          } else {
-               item.textContent = item.textContent.trim();
-          }
-     };
+document.addEventListener('DOMContentLoaded', () => {
+     textarea.focus();
 });
 
 textarea.addEventListener('input', () => {
@@ -43,33 +26,123 @@ textarea.addEventListener('input', () => {
           textarea.style.display = 'none';
           const main = document.querySelector('main');
           main.style.display = 'flex';
+          loadData();
      }
 });
-function addListItem(list, btn) {
-     btn.addEventListener('click', () => {
+function loadData() {
+     onValue(ref(db, 'Dictionary/'), (snapshot) => {
+          // Clear all lists
+          namesList.innerHTML = '';
+          thingsList.innerHTML = '';
+          placesList.innerHTML = '';
+          verbsList.innerHTML = '';
+          sentencesList.innerHTML = '';
 
-          let li = document.createElement('li');
-          list.appendChild(li);
-          li.contentEditable = true;
-          li.focus();
+          snapshot.forEach((childSnapshot) => {
+               const key = childSnapshot.key;
+               const data = childSnapshot.val();
 
-          li.addEventListener('dblclick', e => {
-               li.contentEditable = true;
-               li.focus();
-          });
-          li.onblur = () => {
-               li.contentEditable = false;
-               if (li.textContent.trim() === '') {
-                    li.remove();
-               } else {
-                    li.textContent = li.textContent.trim();
+               if (!data) return;
+
+               let targetList;
+
+               switch (key) {
+                    case 'names-list':
+                         targetList = namesList;
+                         break;
+                    case 'things-list':
+                         targetList = thingsList;
+                         break;
+                    case 'places-list':
+                         targetList = placesList;
+                         break;
+                    case 'verbs-list':
+                         targetList = verbsList;
+                         break;
+                    case 'sentences-list':
+                         targetList = sentencesList;
+                         break;
+                    default:
+                         return;
                }
-          };
+
+               Object.entries(data).forEach(([itemId, text]) => {
+                    let li = document.createElement('li');
+                    li.dataset.itemId = itemId;
+
+                    li.textContent = text.split('=')[0];
+                    const span = document.createElement('span');
+                    span.className = 'expla';
+                    span.textContent = " = " + text.split('=')[1];
+                    li.appendChild(span);
+
+                    li.addEventListener('dblclick', () => {
+                         li.contentEditable = true;
+                         li.focus();
+                         li.removeEventListener('blur', () => { });
+                         li.addEventListener('blur', async () => {
+                         try {
+                              li.contentEditable = false;
+                              const itemRef = ref(db, 'Dictionary/' + key + '/' + itemId);
+                              await set(itemRef, li.textContent);
+                         } catch (error) {
+                              console.error('Error updating item:', error);
+                              alert('Failed to update item. Please try again.');
+                         }
+                         });
+                    });
+
+                    targetList.appendChild(li);
+               });
+          });
      });
 }
+function addItem(list) {
+     let li = document.createElement('li');
+     list.appendChild(li);
+     li.contentEditable = true;
+     li.focus();
 
-addListItem(namesList, namesBtn);
-addListItem(placesList, placesBtn);
-addListItem(sentencesList, sentencesBtn);
-addListItem(verbsList, verbsBtn);
-addListItem(thingsList, thingsBtn);
+     li.addEventListener('blur', async () => {
+          try {
+               let text = li.textContent.trim();
+               li.contentEditable = false;
+               if (text === '') {
+                    li.remove();
+               } else {
+                    const itemRef = push(ref(db, 'Dictionary/' + list.id));
+                    li.textContent = text.split('=')[0];
+                    const span = document.createElement('span');
+                    span.className = 'expla';
+                    span.textContent = " = " + text.split('=')[1];
+                    li.appendChild(span);
+                    await set(itemRef, text);
+               }
+          } catch (error) {
+               console.error('Error saving item:', error);
+               alert('Failed to save item. Please try again.');
+          }
+     });
+     li.addEventListener('dblclick', () => {
+          li.contentEditable = true;
+          li.focus();
+          li.removeEventListener('blur', () => { });
+          li.addEventListener('blur', async () => {
+               try {
+                    li.contentEditable = false;
+                    const itemRef = ref(db, 'Dictionary/' + list.id + '/' + li.dataset.itemId);
+                    await update(itemRef, li.textContent);
+               } catch (error) {
+                    console.error('Error updating item:', error);
+                    alert('Failed to update item. Please try again.');
+               }
+          });
+     });
+
+}
+
+namesBtn.addEventListener('click', () => addItem(namesList, true));
+thingsBtn.addEventListener('click', () => addItem(thingsList));
+placesBtn.addEventListener('click', () => addItem(placesList));
+verbsBtn.addEventListener('click', () => addItem(verbsList));
+sentencesBtn.addEventListener('click', () => addItem(sentencesList));

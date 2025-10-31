@@ -1,0 +1,67 @@
+Dictionary
+          
+               
+                    L
+                    oo
+                    OO
+                    W
+                    X
+               
+               +
+          
+          
+
+          
+               
+                    JP (Jack P)
+                    JB (Jack B)
+                    BS (Boya Sean)
+                    FP (Refresh)
+               
+               +
+          
+          
+
+          
+               
+                    JP*
+                    MC
+                    VH*
+                    TD
+                    DH
+               
+               +
+          
+          
+
+          
+               
+                    come- 
+                    go+ 
+                    continue...
+                    what?
+                    where#?
+               
+               +
+          
+          
+
+          
+               
+                    Right @X
+                    Left @W
+                    Back @W Right @X
+                    #VH?
+                    #DH+
+                    #GH-
+                    ?
+                    #?
+                    @L#?
+                    @L?
+                    @L??
+               
+               +
+          
+
+     
+     

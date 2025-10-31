@@ -24,21 +24,19 @@ hr {
      border-top: 1px solid #ccc;
      /* margin: 10px 0; */
 }
-h3 {
-     margin: 5px 0;
-}
-#inputArea {
+#input-area {
      width: 100%;
      height: 100vh;
      border: none;
      outline: none;
      font-size: 16px;
-     padding: 10px;
+     padding: 30px;
      resize: none;
+     /* display: none; */
 }
 main {
-     /* display: none; */
      height: fit-content;
+     display: flex; 
      display: none;
      flex-direction: column;
      padding: 20px;
@@ -53,11 +51,6 @@ section {
      /* justify-content: space-between; */
      flex-wrap: wrap;
 }
-section:has(#sentences-list) {
-     flex-direction: column;
-     align-items: flex-start;
-}
-
 ul {
      list-style: none;
      display: flex;
@@ -66,11 +59,26 @@ ul {
      overflow-wrap: anywhere;
      /* gap: 10px; */
 }
-li .expla {
+.expla {
+     display: none;
+     color: #000;
+     font-weight: normal;
+}
+h4:active ~ ul li.expla {
+     display: inline;
+}
+li:active .expla {
+     display: inline;
+}
+li:focus .expla {
+     display: inline;
+}
+li .verb {
      color: var(--blue);
 }
 li::before {
      color: var(--blue);
+     font-weight: normal;
 }
 li:focus {
      outline: 1px solid var(--light-blue);
@@ -87,10 +95,8 @@ li:focus {
 #sentences-list li::before {
      content: "-- ";
 }
-
-#sentences-list, #instructions-list {
-     flex-direction: column;
-     gap: 0;
+li:focus::before {
+     content: "";
 }
 
 .add {
