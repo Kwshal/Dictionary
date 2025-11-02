@@ -82,17 +82,18 @@ function loadData() {
                          li.focus();
                          li.removeEventListener('blur', () => { });
                          li.addEventListener('blur', async () => {
-                         try {
-                              li.contentEditable = false;
-                              const itemRef = ref(db, 'Dictionary/' + key + '/' + itemId);
-                              await set(itemRef, li.textContent);
-                              if (li.textContent === '') {
-                                   li.remove();
+                              try {
+                                   li.contentEditable = false;
+                                   const itemRef = ref(db, 'Dictionary/' + key + '/' + itemId);
+                                   await set(itemRef, li.textContent);
+                                   if (li.textContent === '') {
+                                        li.remove();
+                                        remove(itemRef);
+                                   }
+                              } catch (error) {
+                                   console.error('Error updating item:', error);
+                                   alert('Failed to update item. Please try again.');
                               }
-                         } catch (error) {
-                              console.error('Error updating item:', error);
-                              alert('Failed to update item. Please try again.');
-                         }
                          });
                     });
 
@@ -113,12 +114,15 @@ function addItem(list) {
                li.contentEditable = false;
                if (text === '' || li.textContent === '@' || li.textContent === '#' || li.textContent === '--') {
                     li.remove();
+                    remove(ref(db, 'Dictionary/' + list.id + '/' + li.dataset.itemId));
                } else {
                     const itemRef = push(ref(db, 'Dictionary/' + list.id));
                     li.textContent = text.split('=')[0];
                     const span = document.createElement('span');
                     span.className = 'expla';
-                    span.textContent = " = " + text.split('=')[1];
+                    if (text.includes('=')) {
+                         span.textContent = " = " + text.split('=')[1];
+                    }
                     li.appendChild(span);
                     await set(itemRef, text);
                }
@@ -134,10 +138,12 @@ function addItem(list) {
           li.addEventListener('blur', async () => {
                try {
                     li.contentEditable = false;
-                    const itemRef = ref(db, 'Dictionary/' + list.id + '/' + li.dataset.itemId);
-                    await update(itemRef, li.textContent);
                     if (li.textContent === '' || li.textContent === '@' || li.textContent === '#' || li.textContent === '--') {
                          li.remove();
+                         remove(ref(db, 'Dictionary/' + list.id + '/' + li.dataset.itemId));
+                    } else {
+                         const itemRef = ref(db, 'Dictionary/' + list.id + '/' + li.dataset.itemId);
+                         await update(itemRef, li.textContent);
                     }
                } catch (error) {
                     console.error('Error updating item:', error);
