@@ -12,12 +12,18 @@
 }
 
 @font-face {
-     font-family: "myFont";
+     font-family: "SS3";
      src: url(./SS3.ttf);
+}
+@font-face {
+     font-family: "myFont";
+     src: url(./HappyMonkey.ttf);
 }
 
 body {
      font-family: "myFont", sans-serif;
+     background-color: #f4f4f4;
+     color: #000;
 }
 hr {
      border: none;
@@ -32,15 +38,17 @@ hr {
      font-size: 16px;
      padding: 30px;
      resize: none;
-     /* display: none; */
+     background-color: #f4f4f4;
+     display: none;
 }
 main {
      height: fit-content;
      display: flex; 
-     display: none;
+     /* display: none; */
      flex-direction: column;
      padding: 20px;
      gap: 5px;
+     font-size: 24px;
 }
 
 section {
@@ -64,8 +72,16 @@ ul {
      color: #000;
      font-weight: normal;
 }
+h4 {
+     font-family: "SS3", sans-serif;
+     color: var(--light-blue);
+     font-weight: 600;
+}
 h4:active ~ ul li.expla {
      display: inline;
+}
+li {
+     letter-spacing: 1px;
 }
 li:active .expla {
      display: inline;
@@ -86,17 +102,14 @@ li:focus {
      border-radius: 2px;
      background-color: #f0f8ff;
 }
-#names-list li::before {
+#names-list:not(:empty) li::before {
      content: "@";
 }
-#places-list li::before {
+#places-list:not(:empty) li::before {
      content: "#";
 }
-#sentences-list li::before {
+#sentences-list:not(:empty) li::before {
      content: "-- ";
-}
-li:focus::before {
-     content: "";
 }
 
 .add {

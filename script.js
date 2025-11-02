@@ -19,6 +19,7 @@ const sentencesBtn = document.getElementById('add-sentence');
 document.addEventListener('DOMContentLoaded', () => {
      textarea.focus();
 });
+loadData();
 
 textarea.addEventListener('input', () => {
      const text = textarea.value;
@@ -85,6 +86,9 @@ function loadData() {
                               li.contentEditable = false;
                               const itemRef = ref(db, 'Dictionary/' + key + '/' + itemId);
                               await set(itemRef, li.textContent);
+                              if (li.textContent === '') {
+                                   li.remove();
+                              }
                          } catch (error) {
                               console.error('Error updating item:', error);
                               alert('Failed to update item. Please try again.');
@@ -107,7 +111,7 @@ function addItem(list) {
           try {
                let text = li.textContent.trim();
                li.contentEditable = false;
-               if (text === '') {
+               if (text === '' || li.textContent === '@' || li.textContent === '#' || li.textContent === '--') {
                     li.remove();
                } else {
                     const itemRef = push(ref(db, 'Dictionary/' + list.id));
@@ -132,6 +136,9 @@ function addItem(list) {
                     li.contentEditable = false;
                     const itemRef = ref(db, 'Dictionary/' + list.id + '/' + li.dataset.itemId);
                     await update(itemRef, li.textContent);
+                    if (li.textContent === '' || li.textContent === '@' || li.textContent === '#' || li.textContent === '--') {
+                         li.remove();
+                    }
                } catch (error) {
                     console.error('Error updating item:', error);
                     alert('Failed to update item. Please try again.');
