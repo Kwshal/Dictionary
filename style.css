@@ -40,12 +40,12 @@ hr {
      padding: 30px;
      resize: none;
      background-color: #f4f4f4;
-     display: none;
+     
 }
 main {
      height: fit-content;
      display: flex; 
-     /* display: none; */
+      display: none; 
      flex-direction: column;
      padding: 20px;
      gap: 5px;
