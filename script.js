@@ -19,7 +19,7 @@ const sentencesBtn = document.getElementById('add-sentence');
 document.addEventListener('DOMContentLoaded', () => {
      textarea.focus();
 });
-loadData();
+// loadData();
 
 textarea.addEventListener('input', () => {
      const text = textarea.value;
@@ -74,9 +74,16 @@ function loadData() {
                     li.textContent = text.split('=')[0];
                     const span = document.createElement('span');
                     span.className = 'expla';
-                    span.textContent = " = " + text.split('=')[1];
+                    if (text.split('=')[1]) span.textContent = "= " + text.split('=')[1];
                     li.appendChild(span);
-
+                    li.addEventListener("touchmove", (e) => {
+                         e.preventDefault();
+                         li.querySelector('.expla').style.display = 'inline';
+                    });
+                    li.addEventListener("touchend", (e) => {
+                         e.preventDefault();
+                         li.querySelector('.expla').style.display = 'none';
+                    });
                     li.addEventListener('dblclick', () => {
                          li.contentEditable = true;
                          li.focus();
@@ -100,6 +107,7 @@ function loadData() {
                     targetList.appendChild(li);
                });
           });
+
      });
 }
 function addItem(list) {
@@ -138,12 +146,13 @@ function addItem(list) {
           li.addEventListener('blur', async () => {
                try {
                     li.contentEditable = false;
-                    if (li.textContent === '' || li.textContent === '@' || li.textContent === '#' || li.textContent === '--') {
+                    let text = li.textContent.trim();
+                    if (text === '' || text === '@' || text === '#') {
                          li.remove();
                          remove(ref(db, 'Dictionary/' + list.id + '/' + li.dataset.itemId));
                     } else {
                          const itemRef = ref(db, 'Dictionary/' + list.id + '/' + li.dataset.itemId);
-                         await update(itemRef, li.textContent);
+                         await update(itemRef, text);
                     }
                } catch (error) {
                     console.error('Error updating item:', error);
@@ -154,8 +163,8 @@ function addItem(list) {
 
 }
 
-namesBtn.addEventListener('click', () => addItem(namesList, true));
-thingsBtn.addEventListener('click', () => addItem(thingsList));
-placesBtn.addEventListener('click', () => addItem(placesList));
-verbsBtn.addEventListener('click', () => addItem(verbsList));
-sentencesBtn.addEventListener('click', () => addItem(sentencesList));
+namesBtn.addEventListener('dblclick', () => addItem(namesList, true));
+thingsBtn.addEventListener('dblclick', () => addItem(thingsList));
+placesBtn.addEventListener('dblclick', () => addItem(placesList));
+verbsBtn.addEventListener('dblclick', () => addItem(verbsList));
+sentencesBtn.addEventListener('dblclick', () => addItem(sentencesList));
