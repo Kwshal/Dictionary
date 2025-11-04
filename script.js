@@ -84,7 +84,7 @@ function loadData() {
                          e.preventDefault();
                          li.querySelector('.expla').style.display = 'none';
                     });
-                    li.addEventListener('dblclick', () => {
+                    li.addEventListener('click', () => {
                          li.contentEditable = true;
                          li.focus();
                          li.removeEventListener('blur', () => { });
@@ -139,7 +139,7 @@ function addItem(list) {
                alert('Failed to save item. Please try again.');
           }
      });
-     li.addEventListener('dblclick', () => {
+     li.addEventListener('click', () => {
           li.contentEditable = true;
           li.focus();
           li.removeEventListener('blur', () => { });
