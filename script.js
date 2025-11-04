@@ -76,15 +76,15 @@ function loadData() {
                     span.className = 'expla';
                     if (text.split('=')[1]) span.textContent = "= " + text.split('=')[1];
                     li.appendChild(span);
-                    li.addEventListener("touchmove", (e) => {
-                         e.preventDefault();
-                         li.querySelector('.expla').style.display = 'inline';
-                    });
-                    li.addEventListener("touchend", (e) => {
-                         e.preventDefault();
-                         li.querySelector('.expla').style.display = 'none';
-                    });
-                    li.addEventListener('click', () => {
+                    // li.addEventListener("touchmove", (e) => {
+                    //      e.preventDefault();
+                    //      li.querySelector('.expla').style.display = 'inline';
+                    // });
+                    // li.addEventListener("touchend", (e) => {
+                    //      e.preventDefault();
+                    //      li.querySelector('.expla').style.display = 'none';
+                    // });
+                    li.addEventListener('touchmove', () => {
                          li.contentEditable = true;
                          li.focus();
                          li.removeEventListener('blur', () => { });
@@ -139,7 +139,7 @@ function addItem(list) {
                alert('Failed to save item. Please try again.');
           }
      });
-     li.addEventListener('click', () => {
+     li.addEventListener('touchmove', () => {
           li.contentEditable = true;
           li.focus();
           li.removeEventListener('blur', () => { });
