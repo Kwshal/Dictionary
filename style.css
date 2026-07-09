@@ -1,5 +1,6 @@
 :root {
      --blue: #004080;
+--red: #804000;
      --light-blue: #d0dbdf;
      --dark-blue: #a0b4bb;
 }
@@ -108,6 +109,7 @@ li::before {
 }
 #names-list:not(:empty) li::before {
      content: "@";
+color: var(--red);
 }
 #places-list:not(:empty) li::before {
      content: "#";
