@@ -93,6 +93,7 @@ li {
      /* background-color: white; */
     /* padding: 2px 10px;*/
      border: 1px solid var(--dark-blue);
+border: none;
      outline: none;
 }
 li:active .expla {
@@ -105,7 +106,7 @@ li .verb {
      color: var(--blue);
 }
 li::before {
-     
+     content: ' ';
      font-weight: normal;
 }
 #names-list:not(:empty) li::before {
