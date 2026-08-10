@@ -1,5 +1,6 @@
 :root {
-     --blue: #004080;
+     --blue: #004080; /*formerly #004080*/
+--red: #804000;
      --light-blue: #d0dbdf;
      --dark-blue: #a0b4bb;
      --names-heading: #800000;
@@ -21,6 +22,7 @@
      scrollbar-width: none;
      border: none;
      user-select: none;
+font-family: sans-serif !important;
 }
 
 @font-face {
@@ -99,7 +101,7 @@ ol {
 }
 
 .expla {
-     display: none;
+     display: inline;
      color: #666;
      font-weight: normal;
 }
@@ -138,12 +140,13 @@ li .verb {
 }
 
 li::before {
-     color: var(--blue);
+     content: ' ';
      font-weight: normal;
 }
 
 #names-list:not(:empty) li::before {
      content: "@";
+
 }
 
 #places-list:not(:empty) li::before {
