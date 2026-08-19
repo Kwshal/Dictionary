@@ -12,17 +12,32 @@
 </head>
 
 <body>
-     <!-- foll screen textarea (input) -->
+     <!-- full screen textarea (input) -->
+     
      <input type="text" id="input-area" placeholder="Type here..."></input>
      <!-- <h5>Dictionary</h5> -->
      <main>
+          <form id="input-form">
+               <select name="word-type" id="word-type">
+                    <option value="word">word</option>
+                    <option value="name">@ name</option>
+                    <option value="place"># place</option>
+                    <option value="verb">. verb</option>
+                    <option value="sentence">sentence</option>
+               </select>
+               <input type="text" id="word-input" placeholder="Word = Meaning"></input>
+               <button type="button" id="add-btn">Add</button>
+          </form>
+          <!-- <hr> -->
           <section>
                <div class="head-wrapper">
+                    <hr>
                     <h5 id="names-heading">Names </h5>
-                    <button id="add-name" class="add">
+                    <!-- <button id="add-name" class="add">
                          +
                     </button>
-                    <label for="name"><img alt="eye" src="./eye.png"></label>
+                    <label for="name"><img alt="eye" src="./eye.png"></label> -->
+                    <hr>
                </div>
                <input type="checkbox" id="name">
                <ol id="names-list">
@@ -32,11 +47,13 @@
 
           <section>
                <div class="head-wrapper">
+                    <hr>
                     <h5 id="places-heading">Places </h5>
-                    <button id="add-place" class="add">
+                    <!-- <button id="add-place" class="add">
                          +
                     </button>
-                    <label for="place"><img alt="eye" src="./eye.png"></label>
+                    <label for="place"><img alt="eye" src="./eye.png"></label> -->
+                    <hr>
                </div>
                <input type="checkbox" id="place">
                <ol id="places-list">
@@ -47,11 +64,13 @@
 
           <section>
                <div class="head-wrapper">
+                    <hr>
                     <h5 id="verbs-heading">Verbs </h5>
-                    <button id="add-verb" class="add">
+                    <!-- <button id="add-verb" class="add">
                          +
                     </button>
-                    <label for="verb"><img alt="eye" src="./eye.png"></label>
+                    <label for="verb"><img alt="eye" src="./eye.png"></label> -->
+                    <hr>
                </div>
                <input type="checkbox" id="verb">
                <ol id="verbs-list">
@@ -60,30 +79,36 @@
           <!-- <hr> -->
           <section>
                <div class="head-wrapper">
-                    <h5 id="things-heading">Words </h5>
-                    <button id="add-thing" class="add">
+                    <hr>
+                    <h5 id="words-heading">Words </h5>
+                    <!-- <button id="add-word" class="add">
                          +
                     </button>
-                    <label for="thing"><img alt="eye" src="./eye.png"></label>
+                    <label for="word"><img alt="eye" src="./eye.png"></label> -->
+                    <hr>
                </div>
-               <input type="checkbox" id="thing">
-               <ol id="things-list">
+               <input type="checkbox" id="word">
+               <ol id="words-list">
                </ol>
           </section>
           <!-- <hr> -->
 
           <section>
                <div class="head-wrapper">
+                    <hr>
                     <h5 id="sentences-heading">Sentences </h5>
-                    <button id="add-sentence" class="add">
+                    <!-- <button id="add-sentence" class="add">
                          +
                     </button>
-                    <label for="sentence"><img alt="eye" src="./eye.png"></label>
+                    <label for="sentence"><img alt="eye" src="./eye.png"></label> -->
+                    <hr>
                </div>
                <input type="checkbox" id="sentence">
                <ol id="sentences-list">
                </ol>
           </section>
+
+
 
      </main>
      <script src="script.js" type="module"></script>
