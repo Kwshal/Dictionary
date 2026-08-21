@@ -13,25 +13,28 @@
 
 <body>
      <!-- full screen textarea (input) -->
-     
+
      <input type="text" id="input-area" placeholder="Type here..."></input>
      <!-- <h5>Dictionary</h5> -->
      <main>
           <form id="input-form">
-               <select name="word-type" id="word-type">
-                    <option value="word">word</option>
-                    <option value="name">@ name</option>
-                    <option value="place"># place</option>
-                    <option value="verb">. verb</option>
-                    <option value="sentence">sentence</option>
-               </select>
                <input type="text" id="word-input" placeholder="Word = Meaning"></input>
-               <button type="button" id="add-btn">Add</button>
+               <div class="select-wrapper">
+                    <select name="word-type" id="word-type">
+                         <option value="words-list">word</option>
+                         <option value="names-list">@ name</option>
+                         <option value="places-list"># place</option>
+                         <option value="verbs-list">. verb</option>
+                         <option value="sentences-list">sentence</option>
+                    </select>
+                    <button type="button" id="add-btn">Add</button>
+               </div>
+
           </form>
           <!-- <hr> -->
           <section>
                <div class="head-wrapper">
-                    <hr>
+                    <!-- <hr> -->
                     <h5 id="names-heading">Names </h5>
                     <!-- <button id="add-name" class="add">
                          +
@@ -47,7 +50,7 @@
 
           <section>
                <div class="head-wrapper">
-                    <hr>
+                    <!-- <hr> -->
                     <h5 id="places-heading">Places </h5>
                     <!-- <button id="add-place" class="add">
                          +
@@ -64,7 +67,7 @@
 
           <section>
                <div class="head-wrapper">
-                    <hr>
+                    <!-- <hr> -->
                     <h5 id="verbs-heading">Verbs </h5>
                     <!-- <button id="add-verb" class="add">
                          +
@@ -79,7 +82,7 @@
           <!-- <hr> -->
           <section>
                <div class="head-wrapper">
-                    <hr>
+                    <!-- <hr> -->
                     <h5 id="words-heading">Words </h5>
                     <!-- <button id="add-word" class="add">
                          +
@@ -95,7 +98,7 @@
 
           <section>
                <div class="head-wrapper">
-                    <hr>
+                    <!-- <hr> -->
                     <h5 id="sentences-heading">Sentences </h5>
                     <!-- <button id="add-sentence" class="add">
                          +
