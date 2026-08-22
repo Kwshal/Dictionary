@@ -239,7 +239,7 @@ hr {
 }
 #word-input {
      height: 50px;
-     width: clamp(200px, 80%, 400px);
+     width: clamp(200px, 100%, 400px);
      /* flex-basis: 100px; */
      /* padding: 5px; */
      /* border-radius: 15px; */
@@ -266,9 +266,11 @@ hr {
      display: flex;
      gap: 5px;
      width: clamp(200px, 80%, 400px);
+width: fit-content;
      justify-content: right;
      /* border: 1px solid #000; */
           /* background-color: #f3f8f8; */
           position: absolute;
+right:0;
 
 }
