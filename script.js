@@ -35,11 +35,14 @@ function loadData() {
           verbsList.innerHTML = '';
           sentencesList.innerHTML = '';
 
+          // console.log(`Loading data from Firebase...`, snapshot.val());
+
           snapshot.forEach((childSnapshot) => {
                const key = childSnapshot.key; // word-list
+               // console.log(`Loading data for list: ${key}`, typeof key);
                const data = childSnapshot.val(); // {itemId: "word = explanation", ...}
 
-               if (!data) return;
+               if (!data || !key) return;
                let targetList = document.getElementById(key);
 
                Object.entries(data).forEach(([itemId, text]) => {
@@ -48,11 +51,11 @@ function loadData() {
                     const li = createListItem(word, expla, itemId);
 
                     // li.addEventListener('click', () => {
-                         li.contentEditable = true;
-                         // li.focus();
+                    li.contentEditable = true;
+                    // li.focus();
                     // });
                     li.addEventListener('blur', () => updateListItem(key, itemId, li));
-
+                    // console.log(key, );
                     targetList.appendChild(li);
                });
           });
@@ -60,20 +63,27 @@ function loadData() {
      });
 }
 function addItem(list, text) {
-     const itemRef = push(ref(db, 'Dictionary/' + list.id));
+     const itemRef = push(ref(db, 'Dictionary/' + list));
      set(itemRef, text);
+     // console.log(`Added item to ${list.id}: ${text}`);
 }
 
-addBtn.addEventListener('click', () => {
-     const selectedList = document.getElementById('word-type').value;
-     const wordInput = document.getElementById('word-input');
-     const inputValue = wordInput.value.trim();
+const wordInput = document.getElementById('word-input');
+const selectedList = document.getElementById('word-type');
+document.querySelectorAll('h5').forEach(h5 => {
+     h5.addEventListener('click', () => {
+          let list = document.getElementById(h5.id.replace('-heading', '-list'));
+          wordInput.focus();
+          selectedList.value = list.id;
+          // console.log(`Selected list: ${selectedList.value}`, list, 5);
+     });
+});
 
-     if (inputValue === '') {
-          alert('Please enter a value before adding.');
-          return;
-     }
-     addItem(selectedList, inputValue);
+addBtn.addEventListener('click', () => {
+     const inputValue = wordInput.value.trim();
+     // console.log(`Adding item to ${selectedList}: ${inputValue}`);
+     inputValue && addItem(selectedList.value, inputValue);
+     wordInput.value = '';
 });
 
 function createListItem(word, expla, id) {
@@ -98,14 +108,14 @@ async function updateListItem(list, id, li) {
           // li.contentEditable = false;
           const itemRef = ref(db, 'Dictionary/' + list + '/' + id);
           await set(itemRef, li.textContent);
-          if (li.textContent === '') deleteListItem(li);
+          if (li.textContent === '') deleteListItem(li, itemRef);
      } catch (error) {
           console.error('Error updating item:', error);
           alert('Failed to update item. Please try again.');
      }
 };
 
-function deleteListItem(li) {
+function deleteListItem(li, itemRef) {
      li.remove();
      remove(itemRef);
 }
