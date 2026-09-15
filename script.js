@@ -84,6 +84,7 @@ addBtn.addEventListener('click', () => {
      // console.log(`Adding item to ${selectedList}: ${inputValue}`);
      inputValue && addItem(selectedList.value, inputValue);
      wordInput.value = '';
+     wordInput.focus();
 });
 
 function createListItem(word, expla, id) {
@@ -120,3 +121,11 @@ function deleteListItem(li, itemRef) {
      remove(itemRef);
 }
 
+const filterBtns = document.querySelectorAll('.hide-btn');
+filterBtns.forEach(btn => btn.addEventListener('click', toggleHidden) );
+function toggleHidden(e) {
+     const btn = e.target;
+     const list = document.getElementById(btn.dataset.listName);
+     btn.classList.toggle('toggle-off');
+     list.parentElement.classList.toggle('hidden');
+}

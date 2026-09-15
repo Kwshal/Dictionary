@@ -12,10 +12,10 @@
 </head>
 
 <body>
-     <!-- full screen textarea (input) -->
+     <!-- full screen textakgfrea (input) -->
 
+     <h5 id="title">Dictionary</h5>
      <input type="text" id="input-area" placeholder="Type here..."></input>
-     <!-- <h5>Dictionary</h5> -->
      <main>
           <form id="input-form">
                     <select name="word-type" id="word-type">
@@ -24,90 +24,78 @@
                          <option value="places-list">Spot</option>
                          <option value="verbs-list">Verb</option>
                          <option value="sentences-list">Line</option>
+                         <option value="dates-list">Date</option>
                     </select>
-               <input type="text" id="word-input" placeholder="Add New (word = meaning)"></input>
+               <input type="text" id="word-input" placeholder="Add New Word"></input>
                <!-- <div class="select-wrapper"> -->
                     <button type="button" id="add-btn">Add</button>
                <!-- </div> -->
 
           </form>
-          <!-- <hr> -->
+
+          <!-- filters tabs -->
+          <div id="filter-btns-container">
+               <button data-list-name="names-list" class="hide-btn">@</button>
+               <button data-list-name="places-list" class="hide-btn">#</button>
+               <button data-list-name="verbs-list" class="hide-btn">/</button>
+               <button data-list-name="words-list" class="hide-btn">W</button>|
+               <button data-list-name="sentences-list" class="hide-btn">L</button>
+               <button data-list-name="dates-list" class="hide-btn">⏱︎</button>
+          </div>
+          
           <section>
                <div class="head-wrapper">
-                    <!-- <hr> -->
                     <h5 id="names-heading">Names </h5>
-                    <!-- <button id="add-name" class="add">
-                         +
-                    </button>
-                    <label for="name"><img alt="eye" src="./eye.png"></label> -->
                     <hr>
                </div>
                <input type="checkbox" id="name">
                <ol id="names-list">
                </ol>
           </section>
-          <!-- <hr> -->
-
           <section>
                <div class="head-wrapper">
-                    <!-- <hr> -->
-                    <h5 id="places-heading">Places </h5>
-                    <!-- <button id="add-place" class="add">
-                         +
-                    </button>
-                    <label for="place"><img alt="eye" src="./eye.png"></label> -->
+                    <h5 id="places-heading">Spots </h5>
                     <hr>
                </div>
                <input type="checkbox" id="place">
                <ol id="places-list">
                </ol>
           </section>
-          <!-- <hr> -->
-
-
           <section>
                <div class="head-wrapper">
-                    <!-- <hr> -->
                     <h5 id="verbs-heading">Verbs </h5>
-                    <!-- <button id="add-verb" class="add">
-                         +
-                    </button>
-                    <label for="verb"><img alt="eye" src="./eye.png"></label> -->
                     <hr>
                </div>
                <input type="checkbox" id="verb">
                <ol id="verbs-list">
                </ol>
           </section>
-          <!-- <hr> -->
           <section>
                <div class="head-wrapper">
-                    <!-- <hr> -->
                     <h5 id="words-heading">Words </h5>
-                    <!-- <button id="add-word" class="add">
-                         +
-                    </button>
-                    <label for="word"><img alt="eye" src="./eye.png"></label> -->
                     <hr>
                </div>
                <input type="checkbox" id="word">
                <ol id="words-list">
                </ol>
           </section>
-          <!-- <hr> -->
-
+          <br>
           <section>
                <div class="head-wrapper">
-                    <!-- <hr> -->
-                    <h5 id="sentences-heading">Sentences </h5>
-                    <!-- <button id="add-sentence" class="add">
-                         +
-                    </button>
-                    <label for="sentence"><img alt="eye" src="./eye.png"></label> -->
+                    <h5 id="sentences-heading">Lines </h5>
                     <hr>
                </div>
                <input type="checkbox" id="sentence">
                <ol id="sentences-list">
+               </ol>
+          </section>
+          <section>
+               <div class="head-wrapper">
+                    <h5 id="dates-heading">Dates </h5>
+                    <hr>
+               </div>
+               <input type="checkbox" id="date">
+               <ol id="dates-list"></ol>
                </ol>
           </section>
 
