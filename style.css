@@ -262,10 +262,6 @@ hr {
 #word-input:focus {
      border-bottom: 1px solid #1eacbe;
 }
-#word-input:not(:placeholder-shown) + #add-btn {
-     color: #1eacbe;
-     border: 1px solid #1eacbe;
-}
 
 #word-input {
      height: 25px;
@@ -313,9 +309,11 @@ hr {
 #filter-btns-container {
      display: flex;
      gap: 5px;
-     /* justify-content: center; */
+     justify-content: space-between;
      align-items: center;
      flex-wrap: wrap;
+          color: #555;
+
 }
 
 .hide-btn {
@@ -325,12 +323,12 @@ hr {
      align-items: center;
      padding: 0;
      color: #555;
-     border-radius: 5px;
-     /* font-size: 20px; */
+     border-radius: 10px;
      cursor: pointer;
      width: fit-content;
      height: fit-content;
      /* border: 1px solid #555; */
+     font-size: large;
      padding: 5px 10px;
      color: #1eacbe;
 }
@@ -340,4 +338,12 @@ hr {
 
 .hidden {
      display: none;
+}
+
+#chat-link {
+     font-size: large;
+     color: #1eacbe;
+     padding: 5px;
+     border-radius: 10px;
+     background-color: #f3f8f8;
 }

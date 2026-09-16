@@ -1,5 +1,4 @@
-import { db, ref, set, get, onValue, push, update, remove } from "./db.js";
-
+import { db, ref, set, onValue, push, update, remove } from "./db.js";
 const textarea = document.getElementById('input-area');
 
 // all lists
@@ -52,7 +51,6 @@ function loadData() {
                     targetList.appendChild(li);
                });
           });
-
      });
 }
 function addItem(list, text) {
@@ -105,7 +103,6 @@ async function updateListItem(list, id, li) {
           if (li.textContent === '') deleteListItem(li, itemRef);
      } catch (error) {
           console.error('Error updating item:', error);
-          alert('Failed to update item. Please try again.');
      }
 };
 
