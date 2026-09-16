@@ -1,7 +1,7 @@
 {
   "name": "My Dictionary App",
-  "short_name": "Dictionary App",
-  "start_url": ".",
+  "short_name": "Dictionary",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#f4f4f4",

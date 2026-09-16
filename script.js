@@ -35,12 +35,9 @@ function loadData() {
           verbsList.innerHTML = '';
           sentencesList.innerHTML = '';
 
-          // console.log(`Loading data from Firebase...`, snapshot.val());
-
           snapshot.forEach((childSnapshot) => {
                const key = childSnapshot.key; // word-list
-               // console.log(`Loading data for list: ${key}`, typeof key);
-               const data = childSnapshot.val(); // {itemId: "word = explanation", ...}
+               const data = childSnapshot.val(); // {itemId: "word = explanation"}
 
                if (!data || !key) return;
                let targetList = document.getElementById(key);
@@ -50,12 +47,8 @@ function loadData() {
                     let [word, expla] = text.split('=').map(s => s.trim());
                     const li = createListItem(word, expla, itemId);
 
-                    // li.addEventListener('click', () => {
                     li.contentEditable = true;
-                    // li.focus();
-                    // });
                     li.addEventListener('blur', () => updateListItem(key, itemId, li));
-                    // console.log(key, );
                     targetList.appendChild(li);
                });
           });
