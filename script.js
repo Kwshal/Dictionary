@@ -72,7 +72,6 @@ document.querySelectorAll('h5').forEach(h5 => {
 
 addBtn.addEventListener('click', () => {
      const inputValue = wordInput.value.trim();
-     // console.log(`Adding item to ${selectedList}: ${inputValue}`);
      inputValue && addItem(selectedList.value, inputValue);
      wordInput.value = '';
      wordInput.focus();
