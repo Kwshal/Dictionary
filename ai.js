@@ -12,7 +12,7 @@ async function handleAIResponse(text) {
 
   try {
     const response = await fetch(
-      "https://dict-ai.kushal3738.workers.dev",
+      "http://dict-ai.kushal3738.workers.dev",
       {
         method: "POST",
         headers: {
