@@ -12,7 +12,7 @@ async function handleAIResponse(text) {
 
   try {
     const response = await fetch(
-      "http://dict-ai.kushal3738.workers.dev",
+      "https://dict-ai.kushal3738.workers.dev",
       {
         method: "POST",
         headers: {
@@ -26,14 +26,20 @@ async function handleAIResponse(text) {
     );
 
     const data = await response.json();
-    // console.log(data);
 
-    chatSoFar += 'ai:'+data.response;
-    li.textContent = data.response;
-    // scroll to bottom
-    if (li.textContent) {
-    inputArea.scrollTop = messages.scrollHeight;
+    if (!response.ok) {
+      throw new Error(data.error || `HTTP error: ${response.status}`);
     }
+
+    if (!data.response) {
+      throw new Error("AI returned no response: " + JSON.stringify(data));
+    }
+
+    chatSoFar += '\nai: ' + data.response;
+    li.textContent = data.response;
+
+    messages.scrollTop = messages.scrollHeight;
+
   } catch (err) {
     console.error("Gemini error:", err);
     li.textContent = "Error generating response." + err;
@@ -43,7 +49,7 @@ async function handleAIResponse(text) {
 async function handleUserInput() {
   if (inputArea.value.trim() !== "") {
     const text = inputArea.value;
-    chatSoFar += 'user:'+text
+    chatSoFar += 'user:' + text
     inputArea.value = "";
 
     const li = document.createElement("li");
