@@ -26,15 +26,17 @@ async function handleAIResponse(text) {
     );
 
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
 
     chatSoFar += 'ai:'+data.response;
     li.textContent = data.response;
     // scroll to bottom
+    if (li.textContent) {
     inputArea.scrollTop = messages.scrollHeight;
+    }
   } catch (err) {
     console.error("Gemini error:", err);
-    li.textContent = "Error generating response.";
+    li.textContent = "Error generating response." + err;
   }
 }
 
