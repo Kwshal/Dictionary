@@ -13,11 +13,17 @@
 
 <body>
      <!-- full screen textakgfrea (input) -->
+     <header>
 
-     <h5 id="title">Dictionary</h5>
+     <h4 id="title">Dictionary</h4>
+     <a id="chat-link" href="./chat.html">✦</a>
+     </header>
+
      <input type="text" id="input-area" placeholder="Type here..."></input>
      <main>
           <form id="input-form">
+               <textarea type="text" id="word-input" placeholder="Add New Word"></textarea>
+               <div class="select-wrapper">
                     <select name="word-type" id="word-type">
                          <option value="names-list">Name</option>
                          <option value="words-list">Word</option>
@@ -26,37 +32,37 @@
                          <option value="sentences-list">Line</option>
                          <option value="dates-list">Date</option>
                     </select>
-               <input type="text" id="word-input" placeholder="Add New Word"></input>
-               <!-- <div class="select-wrapper"> -->
                     <button type="button" id="add-btn">Add</button>
-               <!-- </div> -->
+               </div>
 
           </form>
 
+          <!-- <hr> -->
+
           <!-- filters tabs -->
           <div id="filter-btns-container">
-               <button data-list-name="names-list" class="hide-btn">@</button>
-               <button data-list-name="places-list" class="hide-btn">#</button>
-               <button data-list-name="verbs-list" class="hide-btn">/</button>
-               <button data-list-name="words-list" class="hide-btn">W</button>|
-               <button data-list-name="sentences-list" class="hide-btn">L</button>
-               <button data-list-name="dates-list" class="hide-btn">⏱︎</button>|
-               <a id="chat-link" href="./chat.html">CHAT</a>
+               <button data-list-name="names-list" class="hide-btn">♡</button>
+               <button data-list-name="places-list" class="hide-btn">⚲</button>
+               <button data-list-name="verbs-list" class="hide-btn">ϟ</button>
+               <button data-list-name="words-list" class="hide-btn">W</button>
+               <button data-list-name="sentences-list" class="hide-btn">1.//</button>
+               <button data-list-name="dates-list" class="hide-btn">⏱︎</button>
           </div>
           
           <section>
                <div class="head-wrapper">
                     <h5 id="names-heading">Names </h5>
-                    <hr>
+                    <!-- <hr> -->
                </div>
                <input type="checkbox" id="name">
                <ol id="names-list">
+                    <li class="word"> = hi Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, minima odio mollitia natus voluptatum quae voluptatem, exercitationem fugiat rem, eveniet labore. Necessitatibus ullam veritatis, optio placeat accusantium odio asperiores. Voluptate.</li>
                </ol>
           </section>
           <section>
                <div class="head-wrapper">
                     <h5 id="places-heading">Spots </h5>
-                    <hr>
+                    <!-- <hr> -->
                </div>
                <input type="checkbox" id="place">
                <ol id="places-list">
@@ -65,7 +71,7 @@
           <section>
                <div class="head-wrapper">
                     <h5 id="verbs-heading">Verbs </h5>
-                    <hr>
+                    <span>⏷</span>
                </div>
                <input type="checkbox" id="verb">
                <ol id="verbs-list">
@@ -74,7 +80,7 @@
           <section>
                <div class="head-wrapper">
                     <h5 id="words-heading">Words </h5>
-                    <hr>
+                    <!-- <hr> -->
                </div>
                <input type="checkbox" id="word">
                <ol id="words-list">
@@ -84,7 +90,7 @@
           <section>
                <div class="head-wrapper">
                     <h5 id="sentences-heading">Lines </h5>
-                    <hr>
+                    <!-- <hr> -->
                </div>
                <input type="checkbox" id="sentence">
                <ol id="sentences-list">
@@ -93,7 +99,7 @@
           <section>
                <div class="head-wrapper">
                     <h5 id="dates-heading">Dates </h5>
-                    <hr>
+                    <!-- <hr> -->
                </div>
                <input type="checkbox" id="date">
                <ol id="dates-list"></ol>
